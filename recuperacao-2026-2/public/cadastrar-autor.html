@@ -111,43 +111,37 @@
 
 <script>
 
-    let autores = []
+let autores = []
     function limparFormulario() {
         document.getElementById("form_postagem").reset();
     }
 
     function cadastrar() {
+        let nomeDigitado = nome.value;
+        let especiais = [
+            '!', '@', '#', '$', '%', '¨', '&', '*', '(', ')', '_', '+', '=', '-',
+            '"', "'", '´', '`', '~', '^', ',', '.', ';', ':', '?', '/', '\\', '|',
+            '[', ']', '{', '}', '<', '>',
+            '§', '¢', '£', 'ª', 'º', '°', '¬',
+            '1', '2', '3', '4', '5', '6', '7', '8', '9', '0'
+        ];
 
-let especiais = ['"',"'",'1','!','2','@','3','#'
-                ,'4', '$', '5', '%','6','¨','7'
-                ,'&','8','*','9','(', ')', '0'
-                ,'-','_','+','=','´','`','{','}',
-                '[',']','   '
-]
+        let temInvalido = false;
 
-let nomeDigitado = nome.value 
-if (nomeDigitado) {
-alert(`foi digitado ${nomeDigitado}`)
+        for (let i = 0; i < especiais.length; i++) {
+            if (nomeDigitado.includes(especiais[i])) {
+                temInvalido = true;
+                break; 
+              }
+        }
 
+        if (temInvalido) {
+            alert("O nome do autor não pode conter caracteres numéricos ou especiais!");
+            return false; 
+        }
 
-while (true){
-
-    if (nomeDigitado.includes("@"||"!"))
-{alert(`nao pode o nome ${nomeDigitado}`); }
-
-
-else {
-   alert(`entrei no else do while`) 
-    autores.push(nomeDigitado)
-
-} continue
-    
-}
-
-
-}
-        var corpo = {
-            nome: form_postagem.nome.value
+         var corpo = {
+            nome: nomeDigitado
         }
 
         fetch(`/autores/cadastrar`, {
@@ -172,11 +166,9 @@ else {
             }
         }).catch(function (resposta) {
             console.log(`#ERRO: ${resposta}`);
-
         });
 
         return false;
-
     }
 
 
