@@ -21,7 +21,7 @@ genero.nome as nomeGenero
 function cadastrar(titulo, fkAutor, fkGenero, precoCompra, precoVenda) {
 
     var instrucaoSql = `
-        INSERT INTO livro (titulo, fkAutor, fkGenero, precoCompra, precoVenda) VALUES ('${titulo}', '${fkAutor}', '${fkGenero}', '${precoCompra}', '${precoVenda}');
+        INSERT INTO livro (titulo, fkAutor, fkGenero, precoCompra, precoVenda, quantidade) VALUES ('${titulo}', '${fkAutor}', '${fkGenero}', '${precoCompra}', '${precoVenda}', ${quantidade});
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
@@ -39,9 +39,21 @@ function editar(novoPrecoCompra, novoPrecoVenda, id) {
     return database.executar(instrucaoSql);
 }
 
+function deletar(titulo, fkAutor, fkGenero, precoCompra, precoVenda) {
+
+    var instrucaoSql = `
+          DELETE from livro WHERE id = ${id};
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+
 
 module.exports = {
     listar,
     cadastrar,
-    editar
+    editar,
+    deletar
+
 }

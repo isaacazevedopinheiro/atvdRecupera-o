@@ -26,3 +26,4 @@ CREATE TABLE livro (
     CONSTRAINT fk_livro_autor FOREIGN KEY (fkAutor) REFERENCES autor(id),
     CONSTRAINT fk_livro_genero FOREIGN KEY (fkGenero) REFERENCES genero(id)
 );
+ALTER TABLE livro ADD COLUMN quantidade INT; 

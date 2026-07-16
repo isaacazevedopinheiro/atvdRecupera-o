@@ -115,6 +115,12 @@
                                 <input name="precoVenda" id="precoVenda" maxlength="20" type="Text"></input>
                             </label>
 
+                            <label>
+                                Quantidade:
+                                <br>
+                                <input name="quantidade" id="quantidade" maxlength="20" type="Text"></input>
+                            </label>
+
 
                             <button>Cadastrar</button>
                         </form>
@@ -131,8 +137,8 @@
 </body>
 
 </html>
-
 <script>
+
 
 
 
@@ -140,13 +146,36 @@
         document.getElementById("form_postagem").reset();
     }
 
-    function cadastrar() {
+    function teste() {
+    let precoCompra = Number(form_postagem.precoCompra.value);
+    let precoVenda = 0;
+    let selectGenero = document.getElementById("fkGenero_lista");
+    
+    if (selectGenero.selectedIndex === -1) return;
+
+    let genero = selectGenero.options[selectGenero.selectedIndex].text.toLowerCase().trim();
+
+    if (precoCompra > 100 && (genero == "horror" || genero == "romance")) { 
+        precoVenda = precoCompra * 0.225; }
+    else if (precoCompra <= 50 && (genero == "poesia" || genero == "horror")) { 
+        precoVenda = precoCompra * 0.25; }
+    else if (precoCompra > 50 && precoCompra < 100 && genero == "poesia") { 
+        precoVenda = precoCompra * 0.275; } else {
+        precoVenda = Number(form_postagem.precoVenda.value);}
+
+    form_postagem.precoVenda.value = (precoCompra + precoVenda).toFixed(2);
+}
+
+function cadastrar() {
+    teste();
+
         var corpo = {
             titulo: form_postagem.titulo.value,
             fkGenero: form_postagem.fkGenero_lista.value,
             fkAutor: form_postagem.fkAutor_lista.value,
             precoCompra: form_postagem.precoCompra.value,
-            precoVenda: form_postagem.precoVenda.value
+            precoVenda: form_postagem.precoVenda.value,
+            quantidade: form_postagem.quantidade.value
         }
 
         fetch(`/livros/cadastrar`, {
@@ -260,6 +289,6 @@
     }
 
 
-    
+
 
 </script>

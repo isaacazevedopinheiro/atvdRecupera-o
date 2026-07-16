@@ -122,7 +122,8 @@
             var spanPrecoVenda = document.createElement("span");
             var spanAutor = document.createElement("span");
             var spanGenero = document.createElement("span");
-            
+            var spanQuantidade = document.createElement("span");
+
             var divButtons = document.createElement("div");
             var btnEditar = document.createElement("button");
             var btnDeletar = document.createElement("button");
@@ -133,6 +134,8 @@
             spanPrecoVenda.innerHTML = "Preço de Venda (R$): <b>" + item.precoVenda + "<b>";
             spanAutor.innerHTML = "Autor do Livro: <b>" + item.nomeAutor + "<b>";
             spanGenero.innerHTML = "Gênero: <b>" + item.nomeGenero + "<b>";
+            spanQuantidade.innerHTML = "Quantidade: <br>" + item.quantidade + "<br>" ;
+     
 
             btnEditar.innerHTML = "Editar";
             btnDeletar.innerHTML = "Deletar";
@@ -144,6 +147,7 @@
             spanPrecoCompra.className = "publicacao-precoCompra";
             spanPrecoVenda.className = "publicacao-precoVenda";
             spanGenero.className = "publicacao-genero";
+            spanQuantidade.className = "publicacao-quantidade";
 
             divButtons.className = "div-buttons"
 
@@ -161,6 +165,7 @@
             divitem.appendChild(spanAutor);
             divitem.appendChild(spanPrecoCompra);
             divitem.appendChild(spanPrecoVenda);
+            divitem.appendChild(spanQuantidade);
             divitem.appendChild(divButtons);
             divButtons.appendChild(btnEditar);
             divButtons.appendChild(btnDeletar);

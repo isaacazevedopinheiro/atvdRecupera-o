@@ -15,4 +15,14 @@ router.put("/editar/:id", function (req, res) {
     livrosController.editar(req, res);
 });
 
+router.delete("/editar/:id", function (req, res) {
+    livrosController.deletar(req, res);
+});
+
+
+
+
+
+
+
 module.exports = router;
